@@ -1,10 +1,18 @@
-//
-// Created by Grass Emerald on 06/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_lemin_fdf.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 11:57:08 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/09 11:57:39 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 
-int         find_xoy_max(t_lemin *lemin, int xoy)
+int		find_xoy_max(t_lemin *lemin, int xoy)
 {
 	int i;
 	int max;
@@ -19,7 +27,7 @@ int         find_xoy_max(t_lemin *lemin, int xoy)
 	return (max + 1);
 }
 
-int         *make_one_cell(void)
+int		*make_one_cell(void)
 {
 	int *cell;
 
@@ -31,7 +39,7 @@ int         *make_one_cell(void)
 	return (cell);
 }
 
-int        **make_x_line(int max_x)
+int		**make_x_line(int max_x)
 {
 	int x;
 	int **x_line;
@@ -47,7 +55,7 @@ int        **make_x_line(int max_x)
 	return (x_line);
 }
 
-int        ***from_lem_to_axis(t_lemin *lemin)
+int		***from_lem_to_axis(t_lemin *lemin)
 {
 	int max_x;
 	int max_y;

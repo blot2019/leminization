@@ -1,13 +1,21 @@
-//
-// Created by Grass Emerald on 25/12/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars_hex.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 16:02:56 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/09 17:50:42 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-void	concat_me_stdin(char **args, char *str)
+void		concat_me_stdin(char **args, char *str)
 {
 	static int	i;
 	int			j;
@@ -23,28 +31,7 @@ void	concat_me_stdin(char **args, char *str)
 	dst[i] = '\0';
 }
 
-char	*ft_undin(int fd)
-{
-	char	*buf;
-	char	*line;
-
-	if (!(buf = (char *)malloc(sizeof(char) * 1000000)))
-		return (NULL);
-	buf[0] = '\0';
-	while (get_next_line(fd, &line) > 0)
-	{
-		concat_me_stdin(&buf, line);
-		free(line);
-	}
-	if (!ft_strlen(buf))
-	{
-		free(buf);
-		return (NULL);
-	}
-	return (buf);
-}
-
-int check_and_parse(char **spl, t_lemin *lemin)
+int			check_and_parse(char **spl, t_lemin *lemin)
 {
 	lemin->start = -1;
 	lemin->end = -1;
@@ -53,7 +40,7 @@ int check_and_parse(char **spl, t_lemin *lemin)
 	return (1);
 }
 
-int search_void_string(char *str)
+int			search_void_string(char *str)
 {
 	int i;
 
@@ -66,10 +53,10 @@ int search_void_string(char *str)
 	return (0);
 }
 
-char    *ft_undin_second(int fd)
+char		*ft_undin_second(int fd)
 {
 	char	*buf;
-	int     ret;
+	int		ret;
 
 	if (!(buf = (char *)malloc(sizeof(char) * 10000000)))
 		return (NULL);
@@ -78,20 +65,15 @@ char    *ft_undin_second(int fd)
 	return (buf);
 }
 
-int lets_read(t_lemin *lemin)
+int			lets_read(t_lemin *lemin)
 {
-	char *input;
-	char **spl;
-	int fd;
+	char	*input;
+	char	**spl;
+	int		fd;
 
-//	fd = open("dumb", O_RDONLY);
-	if (!(input = ft_undin_second(0)))
+	fd = 0;
+	if (!(input = ft_undin_second(fd)))
 		return (0);
-//	if (search_void_string(input))
-//	{
-//		free(input);
-//		return (0);
-//	}
 	spl = ft_strsplit(input, '\n');
 	free(input);
 	if (!check_and_parse(spl, lemin))

@@ -1,48 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_function.c                                    :+:      :+:    :+:   */
+/*   structure_init_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 15:18:36 by gemerald          #+#    #+#             */
-/*   Updated: 2020/02/09 15:19:26 by gemerald         ###   ########.fr       */
+/*   Created: 2020/02/08 21:57:41 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/08 21:57:54 by gemerald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void		fill_sqr_table(int sqr_table[])
+int		take_next_start(char *str, int prev_start)
 {
 	int i;
 
 	i = 0;
-	sqr_table[i++] = 97;
-	while (i < 100)
-	{
-		sqr_table[i] = sqr_table[i - 1] * 97;
+	if (prev_start < 0)
+		return (i);
+	else
+		i = prev_start;
+	while (str[i] && str[i] != '-')
 		i++;
-	}
+	while (str[i] && str[i] == '-')
+		i++;
+	return (i);
 }
 
-int			hash_my_name(char *str, int start, int border)
+int		take_next_border(char *str, int prev_border)
 {
-	int			len;
-	int			hash;
-	int			i;
-	static int	sqr_table[100];
+	int i;
 
-	if (!sqr_table[0])
-		fill_sqr_table(sqr_table);
-	i = 0;
-	len = border - start;
-	hash = 0;
-	while (start < border)
-	{
-		if (i > 99)
-			i = 0;
-		hash += (str[start++] * sqr_table[i++]);
-	}
-	hash %= 4096;
-	return (hash);
+	if (prev_border < 0)
+		i = 0;
+	else
+		i = prev_border;
+	while (str[i] && (str[i] == '-' || str[i] == ' '))
+		i++;
+	while (str[i] && (str[i] != '-' && str[i] != ' '))
+		i++;
+	return (i);
 }

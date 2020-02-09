@@ -1,41 +1,18 @@
-//
-// Created by Grass Emerald on 28/12/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure_init_2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/08 21:17:50 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/08 21:57:09 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
-int     take_next_start(char *str, int prev_start)
-{
-	int i;
-
-	i = 0;
-	if (prev_start < 0)
-		return (i);
-	else
-		i = prev_start;
-	while (str[i] && str[i] != '-')
-		i++;
-	while (str[i] && str[i] == '-')
-		i++;
-	return (i);
-}
-
-int     take_next_border(char *str, int prev_border)
-{
-	int i;
-
-	if (prev_border < 0)
-		i = 0;
-	else
-		i = prev_border;
-	while (str[i] && (str[i] == '-' || str[i] == ' '))
-		i++;
-	while (str[i] && (str[i] != '-' && str[i] != ' '))
-		i++;
-	return (i);
-}
-
-int     fill_borders(char *str)
+int		fill_borders(char *str)
 {
 	int i;
 	int border_count;
@@ -50,23 +27,8 @@ int     fill_borders(char *str)
 	return (border_count);
 }
 
-int     real_hash(int first_hash, t_lemin *lemin)
+int		fill_one_link(char *str, t_hash *hash_found)
 {
-	int i;
-
-	i = 0;
-	while (i < lemin->rooms_len)
-	{
-		if (first_hash == lemin->rooms[i].hash)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int     fill_one_link(char *str, t_hash *hash_found, t_lemin *lemin)
-{
-	int border_count;
 	int start;
 	int border;
 
@@ -88,32 +50,44 @@ int     fill_one_link(char *str, t_hash *hash_found, t_lemin *lemin)
 	return (1);
 }
 
-int     take_links(t_lemin *lemin, char **spl)
+int		error_out_link_create(t_hash *hash_found)
 {
-	int y;
-	t_hash hash_found;
+	free((*hash_found).first_name);
+	free((*hash_found).second_name);
+	return (0);
+}
 
-	y = lemin->start_links - 1;
-//	y = 1823;
+void	init_take_var(t_lemin *lemin, int *y, int *links_count)
+{
+	*y = lemin->start_links - 1;
+	*links_count = 0;
+}
+
+int		take_links(t_lemin *lemin, char **spl)
+{
+	int		y;
+	t_hash	hash_found;
+	int		links_count;
+
+	init_take_var(lemin, &y, &links_count);
 	while (spl[++y] && spl[y][0] != 'L')
 	{
-
 		if (spl[y][0] != '#')
 		{
 			hash_found.first_name = NULL;
 			hash_found.second_name = NULL;
-			if (!fill_one_link(spl[y], &hash_found, lemin))
+			if (!fill_one_link(spl[y], &hash_found))
 				return (0);
 			if (!create_link_in_room(lemin, hash_found))
-			{
-				free(hash_found.first_name);
-				free(hash_found.second_name);
-				return (0);
-			}
-			free(hash_found.first_name);
-			free(hash_found.second_name);
+				return (error_out_link_create(&hash_found));
+			free_hash_found(&hash_found);
+			links_count++;
 		}
+		else if (!ft_strcmp(spl[y], "##start") || !ft_strcmp(spl[y], "##end"))
+			return (0);
 	}
 	lemin->start_move = y + 1;
+	if (!links_count)
+		return (0);
 	return (1);
 }

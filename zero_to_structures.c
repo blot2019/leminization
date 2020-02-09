@@ -6,7 +6,7 @@
 /*   By: bgerda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 17:42:25 by bgerda            #+#    #+#             */
-/*   Updated: 2019/11/23 17:46:07 by bgerda           ###   ########.fr       */
+/*   Updated: 2020/02/09 17:40:36 by gemerald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	zero_to_vizor(t_point *half)
 
 void	zero_to_half(t_point *half, t_lemin *lemin)
 {
-	//half->axis = (int ***)char_to_point(input);
 	half->axis = (int ***)from_lem_to_axis(lemin);
 	touch_my_node(half, lemin);
 	half->min_z = 0;
@@ -61,15 +60,3 @@ void	zero_to_half(t_point *half, t_lemin *lemin)
 	zero_to_vizor(half);
 	zero_to_rot(&half->rot);
 }
-
-//char	*ft_undin(int fd)
-//{
-//	char	*buf;
-//	int		ret;
-//
-//	if (!(buf = (char *)malloc(sizeof(char) * 5000000)))
-//		return (NULL);
-//	while ((ret = read(fd, buf, 5000000)))
-//		buf[ret] = '\0';
-//	return (buf);
-//}

@@ -61,7 +61,7 @@ int				key_press_hook(int key, void *param)
 	half = ((t_point *)param);
 	if (key == 53)
 	{
-		free_to_axis(&half->axis);
+		free_for_all(half->lem);
 		exit(0);
 	}
 	if (key == 89 || key == 92 || key == 86 || key == 88 || key == 83 ||
@@ -76,12 +76,8 @@ int				key_press_hook(int key, void *param)
 
 int				exit_hook(int key, void *param)
 {
-	t_point *half;
-
-	half = ((t_point *)param);
 	if (key && param)
 	{
-		free_to_axis(&half->axis);
 		exit(1);
 	}
 	return (0);

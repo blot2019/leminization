@@ -6,7 +6,7 @@
 /*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 12:40:10 by gemerald          #+#    #+#             */
-/*   Updated: 2019/11/23 18:06:35 by gemerald         ###   ########.fr       */
+/*   Updated: 2020/02/09 15:54:43 by gemerald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct		s_point
 	t_vizor			vizor;
 	int				projection;
 	t_rot			rot;
-	t_lemin         *lem;
+	t_lemin			*lem;
 }					t_point;
 
 typedef struct		s_pix
@@ -113,10 +113,16 @@ int					mouse_release_hook(int key, int x, int y, void *param);
 void				free_to_axis(int ****spl);
 void				init_var_draw(t_pix *delta, t_pix *sign,\
 									t_pix start, t_pix end);
-int        ***from_lem_to_axis(t_lemin *lemin);
-void       touch_my_node(t_point *half, t_lemin *lemin);
-void draw_circle(t_point *half, t_pix start, int radius);
-void            move_my_ants(t_point *half);
-int		draw_text(t_point *half);
+int					***from_lem_to_axis(t_lemin *lemin);
+void				touch_my_node(t_point *half, t_lemin *lemin);
+void				draw_circle(t_point *half, t_pix start, int radius);
+void				move_my_ants(t_point *half);
+int					draw_text(t_point *half);
+int					exit_hook(int key, void *param);
+void				next_wh_circle(int *x, int *y, int *delta);
+char				*print_ant_name(char *str, int start);
+void				init_ant_name(char *str, int *start,\
+					int *border, char **ant_name);
+int					draw_point(t_point *half);
 
 #endif

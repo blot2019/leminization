@@ -1,6 +1,14 @@
-//
-// Created by Grass Emerald on 25/12/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 16:05:54 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/09 16:07:05 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 #include <stdio.h>
@@ -12,8 +20,8 @@ int		ft_atoi_push(char *str, int *i, int *ower)
 
 	result = 0;
 	mark = 1;
-	while ((str[*i] == '\f' || str[*i] == '\n' || str[*i] == '\r' ||
-	        str[*i] == '\v' || str[*i] == '\t' || str[*i] == ' '))
+	while ((str[*i] == '\f' || str[*i] == '\n' || str[*i] == '\r' ||\
+				str[*i] == '\v' || str[*i] == '\t' || str[*i] == ' '))
 		(*i)++;
 	if ((str[*i] == '-') || (str[*i] == '+'))
 	{
@@ -33,10 +41,10 @@ int		ft_atoi_push(char *str, int *i, int *ower)
 	return (result * mark);
 }
 
-void        print_rooms(t_lemin *lemin)
+void	print_rooms(t_lemin *lemin)
 {
-	int i;
-	t_links *list;
+	int		i;
+	t_links	*list;
 
 	i = 0;
 	while (i < lemin->rooms_len)
@@ -54,13 +62,12 @@ void        print_rooms(t_lemin *lemin)
 	}
 }
 
-int         init_lemin(t_lemin *lemin, char **spl)
+int		init_lemin(t_lemin *lemin, char **spl)
 {
 	int end;
 
 	end = 1;
 	lemin->initial_text = spl;
-	//ft_print_char_arr(spl);
 	null_pointer_upload(lemin);
 	if (!take_ants(lemin, spl))
 		end = 0;
@@ -71,7 +78,6 @@ int         init_lemin(t_lemin *lemin, char **spl)
 		end = 0;
 	if (end && !take_links(lemin, spl))
 		end = 0;
-	//print_rooms(lemin);
 	if (!end)
 	{
 		free_for_all(lemin);

@@ -1,11 +1,19 @@
-//
-// Created by Grass Emerald on 03/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   make_free.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 16:01:15 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/09 16:01:48 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <zlib.h>
 #include "lemin.h"
 
-void        free_links(t_lemin *lemin)
+void		free_links(t_lemin *lemin)
 {
 	int i;
 
@@ -18,7 +26,7 @@ void        free_links(t_lemin *lemin)
 	}
 }
 
-void        del_list_hash(t_hash_table **hash_chain)
+void		del_list_hash(t_hash_table **hash_chain)
 {
 	t_hash_table	*link;
 	t_hash_table	*f_link;
@@ -32,7 +40,7 @@ void        del_list_hash(t_hash_table **hash_chain)
 	}
 }
 
-void        free_hash_table(t_lemin *lemin)
+void		free_hash_table(t_lemin *lemin)
 {
 	int i;
 
@@ -44,7 +52,7 @@ void        free_hash_table(t_lemin *lemin)
 	}
 }
 
-void        free_for_all(t_lemin *lemin)
+void		free_for_all(t_lemin *lemin)
 {
 	int y;
 

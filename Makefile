@@ -23,7 +23,8 @@ SRCS := change_value.c\
                 structure_init_2.c\
                 utils_for_axis.c\
                 validate_rooms.c\
-                zero_to_structures.c convert_lemin_fdf.c find_visual_nodes.c base_draw.c leminization.c
+                zero_to_structures.c convert_lemin_fdf.c find_visual_nodes.c base_draw.c leminization.c\
+				base_draw_01.c main_helper.c structure_init_1.c structure_init_3.c validate_rooms_01.c
 OBJECTS := $(SRCS:.c=.o)
 HEADER = libft/libft.h
 all: $(NAME)

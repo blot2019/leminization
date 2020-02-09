@@ -6,7 +6,7 @@
 /*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 17:41:12 by gemerald          #+#    #+#             */
-/*   Updated: 2019/11/23 17:45:10 by gemerald         ###   ########.fr       */
+/*   Updated: 2020/02/09 11:56:45 by gemerald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ void			motion_draw(t_point *half)
 	else if (half->mouse.prev_x > half->mouse.x &&
 			half->mouse.prev_y == half->mouse.y)
 		half->rot.tetta -= 0.05;
-	else if ((half->mouse.prev_x < half->mouse.x &&
-			half->mouse.prev_y < half->mouse.y) ||
-			(half->mouse.prev_x > half->mouse.x &&
+	else if ((half->mouse.prev_x < half->mouse.x && half->mouse.prev_y \
+				< half->mouse.y) || (half->mouse.prev_x > half->mouse.x &&
 			half->mouse.prev_y < half->mouse.y))
 		half->rot.beta += 0.05;
 	else if ((half->mouse.prev_x > half->mouse.x &&

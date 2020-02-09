@@ -6,14 +6,14 @@
 /*   By: bgerda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 18:00:33 by bgerda            #+#    #+#             */
-/*   Updated: 2019/11/23 18:02:02 by bgerda           ###   ########.fr       */
+/*   Updated: 2020/02/09 16:00:49 by gemerald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "lemin.h"
 
-void	upload_line(t_point *half, int x, int y)
+void		upload_line(t_point *half, int x, int y)
 {
 	t_pix start;
 	t_pix end;
@@ -25,7 +25,6 @@ void	upload_line(t_point *half, int x, int y)
 		charge_draw(&start, half);
 		charge_draw(&end, half);
 		drawline(start, end, half);
-		//draw_circle(half, start.x, start.y, 5);
 	}
 	if (y < half->max_y - 1)
 	{
@@ -34,91 +33,28 @@ void	upload_line(t_point *half, int x, int y)
 		charge_draw(&start, half);
 		charge_draw(&end, half);
 		drawline(start, end, half);
-		//draw_circle(half, start.x, start.y, 5);
 	}
 }
 
-void    upload_link(t_point *half, t_pix start, t_pix end)
+int			draw_text(t_point *half)
 {
-	charge_draw(&end, half);
-	drawline(start, end, half);
-}
-
-void    draw_start(t_point *half, t_pix start, int radius)
-{
-	start.color = 0xFFFFFF;
-	while (--radius)
-		draw_circle(half, start, radius);
-}
-
-void    draw_end(t_point *half, t_pix start, int radius)
-{
-	start.color = 0xFF00FF;
-	while (--radius)
-		draw_circle(half, start, radius);
-}
-
-int		draw_point(t_point *half)
-{
-//	int x;
-//	int y;
-//
-//	y = 0;
-//	while (half->axis[y])
-//	{
-//		x = 0;
-//		while (half->axis[y][x])
-//		{
-//			upload_line(half, x, y);
-//			x++;
-//		}
-//		y++;
-//	}
-	int i;
-	t_links *list;
-	t_pix start;
-	t_pix end;
-	int radius;
+	int		i;
+	t_pix	start;
 
 	i = -1;
 	while (++i < half->lem->rooms_len)
 	{
-		radius = 10;
-		list = half->lem->rooms[i].links;
-		start = complect_t_pix(half, half->lem->rooms[i].x_coord, half->lem->rooms[i].y_coord);
+		start = complect_t_pix(half,\
+			half->lem->rooms[i].x_coord, half->lem->rooms[i].y_coord);
 		charge_draw(&start, half);
-		while(list)
-		{
-			end = complect_t_pix(half, list->link->x_coord, list->link->y_coord);
-			upload_link(half, start, end);
-			list = list->next;
-		}
-		draw_circle(half, start, radius);
-		mlx_string_put(half->mlx_ptr, half->window, start.x, start.y, 0xFFFFFF, half->lem->rooms[i].name);
-		if (half->lem->rooms[i].part > 0)
-			draw_start(half, start, radius);
-		if (half->lem->rooms[i].part < 0)
-			draw_end(half, start, radius);
-
+		mlx_string_put(half->mlx_ptr,\
+		half->window, start.x - 10,\
+		start.y + 5, 0xFFFFFF, half->lem->rooms[i].name);
 	}
 	return (0);
 }
-int		draw_text(t_point *half)
-{
-	int i;
-	t_pix start;
 
-	i = -1;
-	while (++i < half->lem->rooms_len)
-	{
-		start = complect_t_pix(half, half->lem->rooms[i].x_coord, half->lem->rooms[i].y_coord);
-		charge_draw(&start, half);
-		mlx_string_put(half->mlx_ptr, half->window, start.x - 10, start.y + 5, 0xFFFFFF, half->lem->rooms[i].name);
-
-	}
-	return (0);
-}
-void	open_window(t_point *half)
+void		open_window(t_point *half)
 {
 	draw_point(half);
 	mlx_put_image_to_window(half->mlx_ptr, half->window, half->map, 0, 0);
@@ -127,7 +63,7 @@ void	open_window(t_point *half)
 	mlx_loop(half->mlx_ptr);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_point half;
 	t_lemin lemin;

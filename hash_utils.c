@@ -1,10 +1,18 @@
-//
-// Created by Grass Emerald on 29/12/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 15:19:39 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/09 15:20:23 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
-int     create_hash_cell(t_hash_table **cell)
+int		create_hash_cell(t_hash_table **cell)
 {
 	if (!((*cell) = (t_hash_table *)malloc(sizeof(t_hash_table))))
 		return (0);
@@ -12,7 +20,7 @@ int     create_hash_cell(t_hash_table **cell)
 	return (1);
 }
 
-int     create_hash_cell_chain(t_hash_table **cell)
+int		create_hash_cell_chain(t_hash_table **cell)
 {
 	t_hash_table *chain;
 
@@ -23,7 +31,7 @@ int     create_hash_cell_chain(t_hash_table **cell)
 	return (1);
 }
 
-void    hash_table_upload(t_lemin *lemin)
+void	hash_table_upload(t_lemin *lemin)
 {
 	int i;
 
@@ -43,16 +51,11 @@ void    hash_table_upload(t_lemin *lemin)
 	}
 }
 
-void    null_pointer_upload(t_lemin *lemin)
+void	null_pointer_upload(t_lemin *lemin)
 {
 	int i;
 
 	i = -1;
 	while (++i < 4096)
 		lemin->table_hashes[i] = NULL;
-}
-
-void    hash_my_rooms(t_lemin *lemin)
-{
-
 }

@@ -1,12 +1,20 @@
-//
-// Created by Grass Emerald on 29/12/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_links.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gemerald <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 15:16:26 by gemerald          #+#    #+#             */
+/*   Updated: 2020/02/09 15:17:51 by gemerald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
-t_links  *create_link(t_room *room)
+t_links		*create_link(t_room *room)
 {
-	t_links  *link;
+	t_links *link;
 
 	if (!(link = (t_links *)malloc(sizeof(t_links))))
 		return (NULL);
@@ -15,7 +23,7 @@ t_links  *create_link(t_room *room)
 	return (link);
 }
 
-void    del_list_links(t_links **begin_list)
+void		del_list_links(t_links **begin_list)
 {
 	t_links	*link;
 	t_links	*f_link;
@@ -29,7 +37,7 @@ void    del_list_links(t_links **begin_list)
 	}
 }
 
-int    push_link(t_links **begin_list, t_room *room)
+int			push_link(t_links **begin_list, t_room *room)
 {
 	t_links *list;
 
@@ -53,7 +61,7 @@ int    push_link(t_links **begin_list, t_room *room)
 	return (1);
 }
 
-t_room  *search_in_table(t_lemin *lemin, int hash, char *hash_name)
+t_room		*search_in_table(t_lemin *lemin, int hash, char *hash_name)
 {
 	t_hash_table *list;
 
@@ -69,13 +77,15 @@ t_room  *search_in_table(t_lemin *lemin, int hash, char *hash_name)
 	return (NULL);
 }
 
-int     create_link_in_room(t_lemin *lemin, t_hash hash_found)
+int			create_link_in_room(t_lemin *lemin, t_hash hash_found)
 {
 	t_room *first_room;
 	t_room *second_room;
 
-	first_room = search_in_table(lemin, hash_found.hash_first, hash_found.first_name);
-	second_room = search_in_table(lemin, hash_found.hash_second, hash_found.second_name);
+	first_room =\
+		search_in_table(lemin, hash_found.hash_first, hash_found.first_name);
+	second_room =\
+		search_in_table(lemin, hash_found.hash_second, hash_found.second_name);
 	if (!push_link(&first_room->links, second_room))
 		return (0);
 	if (!push_link(&second_room->links, first_room))
